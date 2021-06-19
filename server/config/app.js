@@ -4,6 +4,14 @@ let path = require('path');
 let cookieParser = require('cookie-parser');
 let logger = require('morgan');
 
+//Authentification  odules
+let session= require('express-session');
+let passport = require('passport');
+let passportlocal = require('passport-local');
+let localStrategy = passportlocal.Strategy;
+let flash = require('connect-flash');
+
+
 //DB setup
 let mongoose = require('mongoose');
 let DB = require('./db');
@@ -30,6 +38,31 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, '../../public')));
 app.use(express.static(path.join(__dirname, '../../node_modules')));// after adding jquery,bootstra[ etc] to access node modules by default
 
+//Setup express session
+app.use(session({
+  secret:"SomeSecret",
+  saveUninitialized:false,
+  resave:false
+}));
+
+//initialize flash
+app.use(flash());
+
+//passport
+app.use(passport.initialize());
+app.use(passport.session());
+
+
+//passport user configuration
+
+//Create a user model Instanced
+let userModel = require('../models/user');
+let User= userModel.User;
+
+//serialize and deserialize the USer info
+
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
