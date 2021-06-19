@@ -1,0 +1,57 @@
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#"><img src="Assets/images/logo.png"  height="100px"></a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+  
+         
+          <li class="nav-item ">
+   
+            <a class="nav-link 
+            <% if(title == "Home") {%>
+              active <% }else {}%>
+            " aria-current="page" href="/Home"><i class="fa fa-home" aria-hidden="true"></i> Home</a>
+          </li>
+  
+          <li class="nav-item">
+            <a class="nav-link  
+            <% if(title == "About") {%>
+              active <% }else {}%>
+              " aria-current="page" href="/About"><i class="fa fa-info" aria-hidden="true"></i> About</a>
+          </li>
+  
+  
+          <li class="nav-item">
+            <a class="nav-link 
+            <% if(title == "Projects") {%>
+              active <% }else {}%>
+            " aria-current="page" href="/Projects"><i class="fa fa-briefcase" aria-hidden="true"></i> Projects</a>
+          </li>
+  
+  
+          <li class="nav-item">
+            <a class="nav-link   <% if(title == "Services") {%>
+              active <% }else {}%> " aria-current="page" href="/Services"><i class="fa fa-cogs" aria-hidden="true"></i> Services</a>
+          </li>
+  
+          <li class="nav-item">
+            <a class="nav-link 
+            <% if(title == "Contact") {%>
+              active <% }else {}%> " aria-current="page" href="/Contact"> <i class="fa fa-mobile-alt" aria-hidden="true"></i>  Contact</a>
+          </li>
+
+
+          <li class="nav-item">
+            <a class="nav-link 
+            <% if(title == "contact-list") {%>
+              active <% }else {}%> " aria-current="page" href="/Contact-list"> <i class="fa fa-mobile-alt" aria-hidden="true"></i>  list</a>
+          </li>
+           </ul>
+   
+      </div>
+    </div>
+  </nav>

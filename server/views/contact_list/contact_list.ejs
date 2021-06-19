@@ -1,0 +1,66 @@
+<%- include ../../views/partials/header.ejs%>
+<!-- Main nav -->
+<%- include ../../views/partials/main_nav.ejs%>
+
+
+
+<main class="container">
+<div class="p-5 mb-4 bg-light rounded-3">
+    <div class="container-fluid py-5">
+      <h1 class="display-5 fw-bold">Welcome to <%= title %> Page</h1>
+      <a href="/contact-list/add" class="btn btn-primary " role="button">
+    <i class="fas fa-plus-circle"></i>Add a Contact
+    </a>
+    <br>
+      <table class="table table-bordered table-striped table-hover">
+        <!--Header Row---->
+        <tr class="d-flex">
+            <th class="text-center">Name</th>
+            <th class="text-center">Number</th>
+            <th class="text-center">Email</th>
+            <th class="text-center"> </th>
+            <th class="text-center"> </th>
+        </tr>
+        <!-- repeatable template rows -->
+        <%for(let count =0;count < ContactList.length;count++){%>
+            <tr class="d-flex">
+                <td class="text-center col-3">
+                    <%=ContactList[count].name %>
+                </td>
+                <td class="text-center col-3">
+                    <%=ContactList[count].number %>
+                </td>
+                <td class="text-center col-3">
+                    <%=ContactList[count].email %>
+                </td>
+
+                <td class="text-center col-1">
+
+                    <a href="/contact-list/edit/<%=ContactList[count]._id %>" class="btn btn-primary btn-sm">
+                    <i class="fas fa-pencil-alt"></i>Edit
+                    </a>
+                </td>
+                <td class="text-center col-1"> 
+                     
+                    <a href="/contact-list/delete/<%=ContactList[count]._id %>" class="btn btn-danger btn-sm">
+                        <i class="fas fa-trash alt"></i>Delete
+                        </a>   
+
+                </td>
+
+ 
+
+
+            </tr>
+            <% } %>
+      </table>
+    </div>
+
+    
+    </div>
+
+    
+  <!-- Bottom Nav-->
+  <%- include ../../views/partials/bottom_nav.ejs%>
+
+  <%- include ../../views/partials/footer.ejs%>
