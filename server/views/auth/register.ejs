@@ -4,9 +4,10 @@
 
 <main class="container">
      
-    <%= if(messages.length > 0)%>
-     <div class="alert alert-danger">
-         <%= messages %>
+   
+    <% if(messages.length > 0){ %>
+        <div class="alert alert-danger">
+            <%= messages %>
      </div>
      <% } %>
      <div class="row">
@@ -24,7 +25,7 @@
 
 
 <fieldset class="form-group">
-    <label for="email">Easword:</label>
+    <label for="email">Email:</label>
     <input type="email" class="form-control" name="email" placeholder="Enter email" id="email" required >
 </fieldset>
 
@@ -49,4 +50,4 @@
 
 <%- include ../partials/bottom_nav.ejs%>
 
-<%- include partials/footer.ejs%>
+<%- include ../partials/footer.ejs%>

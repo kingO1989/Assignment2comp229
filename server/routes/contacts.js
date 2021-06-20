@@ -1,119 +1,36 @@
 let express = require('express');
 let router = express.Router();
 let mongoose = require('mongoose');
+let passport = require('passport');
 
 let List = require('../models/contacts');
 
-router.get('/',(req,res,next)=>{
-    List.find((err,contactList)=>{
-        if(err)
-        {
-            return console.error(err);
-        }
-        else
-        {
-           // console.log(contactList)
+let ListController= require('../controllers/contacts');
+//helper function
+function requireAuth(req,res,next)
+{
+    if(!req.isAuthenticated())
+    {
+        return res.redirect('/login');
+    }
+    next();
 
-           res.render('contact_list/contact_list',{title:'Contact List',ContactList:contactList}); // 
-        }
-    })
-});
-
-
-
+}
+ 
+router.get('/',ListController.displayContacList);
 /* GET Route for  displaying Add page - Create Operation */
-
-router.get('/add',(req,res,next)=>{
-    res.render('contact_list/add',{title:'Add Contact'});
-});
-
+router.get('/add',requireAuth,ListController.displayAddPage);
+ 
 /* POST Route for processing Add page - Create Operation */
-router.post('/add',(req,res,next)=>{
-
-    let newList = List({
-        "name":req.body.name,
-        "number":req.body.name,
-        "email":req.body.name
-    });
-List.create(newList,(err,List)=>
-{
-if(err)
-{
-    console.log(err);
-    res.end(err);
-}
-else
-{
-    res.redirect('/contact-list');
-}
-
-}); 
-});
+router.post('/add',requireAuth,ListController.ProcessAddPage);
 
 /* GET Route for displaying the Edit page - update Operation */
-
-router.get('/edit/:id',(req,res,next)=>{
-   let id=req.params.id;
-   List.findById(id,(err,listToEdit)=>{
-    if(err)
-    {
-        console.log(err);
-        res.end(err);
-    }
-    else
-    {
-        res.render('../views/contact_list/edit',{
-            title:'Edit Book',list:listToEdit
-        });
-    }
-   });
-});
+ 
+router.get('/edit/:id',requireAuth,ListController.getEditPage);
 /* POST Route for processing the Edit page - update Operation */
-router.post('/edit/:id',(req,res,next)=>{
-    let id=req.params.id;
-
-
-    let updatedList = List({
-        "_id":id,
-        "name":req.body.name,
-        "number":req.body.number,
-        "email":req.body.email
-    });
-    List.updateOne({_id:id},updatedList,(err)=>
-    {
-        if(err)
-{
-    console.log(err);
-    res.end(err);
-}
-else
-{
-    res.redirect('/contact-list');
-}
-    }
-    
-    );
-});
+router.post('/edit/:id',requireAuth,ListController.ProcessEditPage );
 
 /* GET to perform Deletion - delete Operation */
 
-router.get('/delete/:id',(req,res,next)=>{
-    let id=req.params.id;
-    List.remove({_id:id},(err)=>
-    {
-        if(err)
-        {
-            console.log(err);
-    res.end(err);  
-        }
-        else{
-            
-    res.redirect('/contact-list');
-        }
-    }
-
-
-    );
-    
-});
+router.get('/delete/:id',requireAuth, ListController.deletePage);
 module.exports = router;

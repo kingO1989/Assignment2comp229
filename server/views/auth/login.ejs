@@ -4,7 +4,7 @@
 
 <main class="container">
      
-    <%= if(messages.length > 0)%>
+    <% if(messages.length > 0){ %>
      <div class="alert alert-danger">
          <%= messages %>
      </div>
@@ -38,4 +38,4 @@
 
 <%- include ../partials/bottom_nav.ejs%>
 
-<%- include partials/footer.ejs%>
+<%- include ../partials/footer.ejs%>
